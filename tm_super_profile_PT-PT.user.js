@@ -1,5 +1,5 @@
-﻿// ==UserScript==
-// @name		   TrophyManager - Super Profile Page
+// ==UserScript==
+// @name		   TrophyManager - Super Profile Page Routine Edition
 // @description	In TrophyManager.com Shows TrExMa Value for Favorite Positions for Player
 // @include		http://trophymanager.com/players/*
 // @exclude		http://trophymanager.com/players
@@ -14,26 +14,27 @@
 // Array to setup the weights of particular skills for each player's actual ability
 // This is the direct weight to be given to each skill.
 // Array maps to these skills:
-//			   [For,Res,Vel,Mar,Tac,TrE,Pos,Pas,Cru,Tec,Cab,Fin,RmL,BP]
+//			     [For,Res,Vel,Mar,Tac,TrE,Pos,Pas,Cru,Tec,Cab,Fin,RmL,BP]
 var positions = [[  1,  3,  1,  1,  1,  3,  3,  2,  2,  2,  1,  3,  3,  3], // D C
-		 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // D E
-		 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // D D
-		 [  1,  2,  2,  1,  1,  1,  1,  1,  2,  2,  1,  3,  3,  3], // MD C
-		 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // MD E
-		 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // MD D
-		 [  2,  2,  3,  1,  1,  1,  1,  1,  3,  1,  2,  3,  3,  3], // M C 
-		 [  2,  2,  1,  1,  1,  1,  1,  1,  1,  1,  2,  3,  3,  3], // M E
-		 [  2,  2,  1,  1,  1,  1,  1,  1,  1,  1,  2,  3,  3,  3], // M D
-		 [  2,  3,  3,  2,  2,  1,  1,  1,  3,  1,  2,  1,  1,  3], // MO C
-		 [  2,  2,  1,  3,  3,  2,  2,  3,  1,  1,  2,  2,  2,  3], // MO E
-		 [  2,  2,  1,  3,  3,  2,  2,  3,  1,  1,  2,  2,  2,  3], // MO D
-		 [  1,  2,  2,  3,  3,  2,  2,  3,  3,  2,  1,  1,  1,  3], // A
-		 [  2,  3,  2,  1,  2,  1,  2,  2,  3,  3,  3]]; // GR
+                 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // D E
+                 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // D D
+                 [  1,  2,  2,  1,  1,  1,  1,  1,  2,  2,  1,  3,  3,  3], // MD C
+                 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // MD E
+                 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // MD D
+                 [  2,  2,  3,  1,  1,  1,  1,  1,  3,  1,  2,  3,  3,  3], // M C 
+                 [  2,  2,  1,  1,  1,  1,  1,  1,  1,  1,  2,  3,  3,  3], // M E
+                 [  2,  2,  1,  1,  1,  1,  1,  1,  1,  1,  2,  3,  3,  3], // M D
+                 [  2,  3,  3,  2,  2,  1,  1,  1,  3,  1,  2,  1,  1,  3], // MO C
+                 [  2,  2,  1,  3,  3,  2,  2,  3,  1,  1,  2,  2,  2,  3], // MO E
+                 [  2,  2,  1,  3,  3,  2,  2,  3,  1,  1,  2,  2,  2,  3], // MO D
+                 [  1,  2,  2,  3,  3,  2,  2,  3,  3,  2,  1,  1,  1,  3], // A
+                 [  2,  3,  2,  1,  2,  1,  2,  2,  3,  3,  3]]; // GR
 
 
 // [  2,  3,  2,  1,  2,  1,  2,  2,  3,  3,  3]
 // Weights need to total 100
-var weights = [ [85,12, 3],  // D C
+var weights = [ 
+        [85,12, 3],  // D C
 		[70,25, 5],  // D E
 		[70,25, 5],  // D D
 		[90,10, 0],  // MD C
@@ -57,7 +58,7 @@ if (location.href.indexOf("/players/") != -1){
 	// skills is an array of skills for each user
 	
 	document.calculateSkill = function(positionIndex, skills) {
-		
+        
 		var totSkill = [0,0,[0, 0, 0],[0,0,0,0,0],[0,0,0,0,0]];
 		var finReg;
 		var finCab;
@@ -217,6 +218,7 @@ if (location.href.indexOf("/players/") != -1){
 	function computeSK(skills){
 	var SKs = [0, 0];
 	var Gok = [0, 0];
+	var SKsRoutine = [0, 0];
 	var setP = [0, 0, 0];
 	var defending = [0, 0, 0, 0, 0];
 	var gameplayStyle = [0, 0, 0, 0, 0];
@@ -253,8 +255,28 @@ if (location.href.indexOf("/players/") != -1){
 				skillAntes = resultado[0];
 			}
 	}
-	
-	return [SKs,Gok,Pos,setP,defending,gameplayStyle];
+	    var routine = $(".zebra > tbody > tr:nth-child(9) > td").eq(0).html();
+		console.log(skills);
+        var routineFormule = (3/100)*(100-(100)*Math.exp(-routine*0.035));
+		console.log(routine);
+		console.log(routineFormule);
+        
+        var skillsRoutine = skills;
+        for (var i = 0; i < skillsRoutine.length; i++){
+            skillsRoutine[i] = Number(skillsRoutine[i]) + Number(routineFormule);
+        }
+        
+        for (var i = 0; i < positionArray.length; i++){
+			var positionIndex = document.findPositionIndex(positionArray[i]);
+			if (positionIndex > -1) {
+				var resultadoRoutine = document.calculateSkill(positionIndex, skillsRoutine);
+				SKsRoutine[i] = resultadoRoutine[0];
+			}
+        }
+        
+        console.log(skillsRoutine);
+        
+	return [SKs,Gok,Pos,setP,defending,gameplayStyle,SKsRoutine];
 	}
 	
 	document.createTR = function(table, SKarray) {
@@ -303,6 +325,29 @@ if (location.href.indexOf("/players/") != -1){
 		table.appendChild(tr);
 	};
 	
+	document.createTRRoutine = function(table, SKarray) {
+		var tr = document.createElement("tr");
+		var th = document.createElement("th");
+		th.innerHTML = "SK1 Routine";
+		tr.appendChild(th);
+		var td = document.createElement("td");
+		td.setAttribute("class", "align_center");
+		td.innerHTML = SKarray[0];
+		tr.appendChild(td);
+		var th = document.createElement("th");
+		th.innerHTML = "SK2 Routine";
+		tr.appendChild(th);
+		var td = document.createElement("td");
+		td.setAttribute("class", "align_center");
+		if (SKarray[1] == 0){
+			td.innerHTML = "N/A";
+		} else {
+			td.innerHTML = SKarray[1];
+		}
+		tr.appendChild(td);
+		table.appendChild(tr);
+	};
+
 document.createTRSetPieces = function(table, nome, SK) {
 		var tr = document.createElement("tr");
 		var th = document.createElement("th");
@@ -344,14 +389,17 @@ document.createTRSetPieces = function(table, nome, SK) {
 	(function() {
 		var playerTable = document.getElementsByClassName("skill_table zebra")[0];
 		var skillArray = document.getSkills(playerTable);
-		var SKs = computeSK(skillArray)[0];
-		var Goks = computeSK(skillArray)[1];
-		var defending = computeSK(skillArray)[4];
-		var setPieces = computeSK(skillArray)[3];
-		var gameplayStyle = computeSK(skillArray)[5];
+        var computeSKv = computeSK(skillArray);
+		var SKs = computeSKv[0];
+		var Goks = computeSKv[1];
+		var defending = computeSKv[4];
+		var setPieces = computeSKv[3];
+		var gameplayStyle = computeSKv[5];
+		var SKsRoutine = computeSKv[6];
 		document.createTR(playerTable, SKs);
+		document.createTRRoutine(playerTable, SKsRoutine);
 		document.createTRGok(playerTable, Goks);
-		if(computeSK(skillArray)[2] != 13){
+		if(computeSKv[2] != 13){
 		
 		document.createTRtwoSides(playerTable, "Def. Direct", defending[0]+"%", "Play Direct", gameplayStyle[0]+"%");
 		document.createTRtwoSides(playerTable, "Def. Wings", defending[1]+"%", "Play Wings", gameplayStyle[1]+"%");
