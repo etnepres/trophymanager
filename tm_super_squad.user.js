@@ -1,4 +1,4 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name           TrophyManager - Super Squad
 // @version 	   2.0.0
 // @description	   Show a super detayled TrophyManager player page.
@@ -478,7 +478,7 @@ document.subSpot = arrayRespostaEquipaR[4];
 
 function get_player_info_history(player_id,show_non_pro_graphs){
 	$.ajaxSetup({async: false});
-	$.post("http://trophymanager.com/ajax/players_get_info.ajax.php",{"player_id":player_id, "type":"history","show_non_pro_graphs":show_non_pro_graphs},function(data){
+	$.post("//trophymanager.com/ajax/players_get_info.ajax.php",{"player_id":player_id, "type":"history","show_non_pro_graphs":show_non_pro_graphs},function(data){
 		if(data != null){	
 			document.thisSeasonData = data["table"]["nat"][0];
 			document.allTimeData = data["table"]["nat"][data["table"]["nat"].length-1];
@@ -504,7 +504,7 @@ document.foundHidden = false;
 function get_player_info_hidden_skills(player_id){
 	$.ajaxSetup({async: false});
 	$.get(
-    "http://trophymanager.com/players/"+player_id+"/",
+    "//trophymanager.com/players/"+player_id+"/",
     {paramOne : 1, paramX : 'abc'},
     function(data) {
        if(data != null){	
@@ -553,7 +553,7 @@ function get_player_info_scout(player_id, player_fp,show_non_pro_graphs){
 
 		
 				$.ajaxSetup({async: false});
-			$.post("http://trophymanager.com/ajax/players_get_info.ajax.php",{"player_id":player_id, "type":"scout","show_non_pro_graphs":show_non_pro_graphs},function(data){
+			$.post("//trophymanager.com/ajax/players_get_info.ajax.php",{"player_id":player_id, "type":"scout","show_non_pro_graphs":show_non_pro_graphs},function(data){
 				
 				if(data != null)
 				{
@@ -668,7 +668,7 @@ function get_player_info_graphs(player_id,show_non_pro_graphs){
 
 		
 				$.ajaxSetup({async: false});
-			$.post("http://trophymanager.com/ajax/players_get_info.ajax.php",{"player_id":player_id, "type":"graphs","show_non_pro_graphs":show_non_pro_graphs},function(data){
+			$.post("//trophymanager.com/ajax/players_get_info.ajax.php",{"player_id":player_id, "type":"graphs","show_non_pro_graphs":show_non_pro_graphs},function(data){
 				if(data != null)
 				{
 						//var ti = parseInt(data.graphs.ti[data.graphs.ti.length-1]);
@@ -2223,10 +2223,3 @@ loadAndExecute("//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js", fun
         $('table.zebra th:eq(1)').click();
   });
 });
-
-
-
-
-
-
-        
