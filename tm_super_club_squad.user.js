@@ -11,7 +11,7 @@
 // @include        https://trophymanager.com/club/*/squad/*
 // @author    	  Joao Manuel Ferreira Fernandes
 // @github		  http://github.com/etnepres/trophymanager.git	
-// @grant			none
+// @grant	      none
 // ==/UserScript==
 
 //Functions needed
