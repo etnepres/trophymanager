@@ -47,16 +47,15 @@ $("#player_table tr:eq(0)").append('<td>ASI</td>');
 $("#player_table tr > .text_fade > div").not(".text_fade_overlay").find("a[player_link]").each(function(){
 
     player_link = $(this).attr("player_link");
+	minigame = $(this).attr('minigame');
 
     if(new_player_array[player_link] == null && team_b_id === ""){
 
         console.log("finding team b id");
 
-        $.post("https://trophymanager.com/ajax/players_get_info.ajax.php",{"player_id":player_link, "type":"history","show_non_pro_graphs":false},function(data){
-
+        $.post("https://trophymanager.com/ajax/tooltip.ajax.php",{"player_id":player_link, "minigame":minigame},function(data){
             data = JSON.parse(data);
-            team_b_id = data.table.nat[0].klub_id;
-
+            team_b_id = data.club.id;
         });
 
         $.post("/ajax/players_get_select.ajax.php",{"type":"change","club_id":team_b_id},function(data){
