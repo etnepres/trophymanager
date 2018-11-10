@@ -43,7 +43,7 @@ $.post("/ajax/players_get_select.ajax.php",{"type":"change","club_id":SUBPAGE},f
 
 });
 
-$("#player_table tr:eq(0)").append('<td>ASI</td>');
+$("#player_table tr:eq(0)").append('<td align="center"><b>ASI</b></td>');
 $("#player_table tr > .text_fade > div").not(".text_fade_overlay").find("a[player_link]").each(function(){
 
     player_link = $(this).attr("player_link");
@@ -72,8 +72,9 @@ $("#player_table tr > .text_fade > div").not(".text_fade_overlay").find("a[playe
     //console.log(current_player_info["asi"]);
 
     parent_select = $(this).parent().parent().parent();
-
-    parent_select.append('<td>'+current_player_info.asi+'</td>');
+    var asi = new String(current_player_info.asi);
+    while(asi != (asi = asi.replace(/^(-?\d+)(\d{3})/, "$1,$2")));
+    parent_select.append('<td align="right">'+asi+'</td>');
 
 });
 
